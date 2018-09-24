@@ -8,7 +8,7 @@ public class SimpleExceptions {
 
 		FileReader fr = null;
 		try {
-			File file = new File("file.txt");
+			File file = new File("sampleFile.csv");
 			fr = new FileReader(file);
 			char[] a = new char[50];
 			fr.read(a); // reads the content to the array

@@ -1,0 +1,101 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Eclispe\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Assignment_3\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Mysql_Access" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="insert_ID" qname="ns1:insert_ID" returnQName="ns1:insert_IDReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://operation.webservice.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:trs" type="ns2:Transaction" xmlns:ns2="http://transaction.webservice.com" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  </ns2:operation>
+  <ns1:operation name="update_ID" qname="ns3:Update_ID" returnQName="ns3:Update_IDReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://operation.webservice.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:txn" type="ns4:Transaction" xmlns:ns4="http://transaction.webservice.com"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="update_ID insert_ID"/>
+  <ns1:parameter name="wsdlPortType" value="Mysql_Access"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://operation.webservice.com,http://transaction.webservice.com"/>
+  <ns1:parameter name="wsdlServicePort" value="Mysql_Access"/>
+  <ns1:parameter name="className" value="com.webservice.operation.Mysql_Access"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://operation.webservice.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="Mysql_AccessService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns5:Transaction" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.webservice.transaction.Transaction" xmlns:ns5="http://transaction.webservice.com"/>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="Webservice_Call" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="get_Transaction" qname="ns6:get_Transaction" returnQName="ns6:get_TransactionReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://webserviceCall.webservice.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:ID" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="createTransaction" qname="ns7:createTransaction" returnQName="ns7:createTransactionReturn" returnType="xsd:string" soapAction="" xmlns:ns7="http://webserviceCall.webservice.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:ID" type="xsd:int"/>
+   <ns1:parameter qname="ns7:NameOnCard" type="xsd:string"/>
+   <ns1:parameter qname="ns7:CardNumber" type="xsd:string"/>
+   <ns1:parameter qname="ns7:UnitPrice" type="xsd:double"/>
+   <ns1:parameter qname="ns7:Quantity" type="xsd:int"/>
+   <ns1:parameter qname="ns7:ExpDate" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="updateTransaction" qname="ns8:updateTransaction" returnQName="ns8:updateTransactionReturn" returnType="xsd:string" soapAction="" xmlns:ns8="http://webserviceCall.webservice.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns8:ID" type="xsd:int"/>
+   <ns1:parameter qname="ns8:NameOnCard" type="xsd:string"/>
+   <ns1:parameter qname="ns8:CardNumber" type="xsd:string"/>
+   <ns1:parameter qname="ns8:UnitPrice" type="xsd:double"/>
+   <ns1:parameter qname="ns8:Quantity" type="xsd:int"/>
+   <ns1:parameter qname="ns8:ExpDate" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="deleteTransaction" qname="ns9:deleteTransaction" returnQName="ns9:deleteTransactionReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://webserviceCall.webservice.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:ID" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="updateTransaction get_Transaction deleteTransaction createTransaction"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="Webservice_Call"/>
+  <ns1:parameter name="className" value="com.webservice.webserviceCall.Webservice_Call"/>
+  <ns1:parameter name="wsdlServicePort" value="Webservice_Call"/>
+  <ns1:parameter name="schemaQualified" value="http://webserviceCall.webservice.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://webserviceCall.webservice.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="Webservice_CallService"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

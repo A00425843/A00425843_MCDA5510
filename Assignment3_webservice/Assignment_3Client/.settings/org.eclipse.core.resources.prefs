@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/com/webservice/operation/Mysql_Access.java=UTF-8
+encoding//src/com/webservice/operation/Mysql_AccessService.java=UTF-8
+encoding//src/com/webservice/operation/Mysql_AccessServiceLocator.java=UTF-8
+encoding//src/com/webservice/operation/Mysql_AccessSoapBindingStub.java=UTF-8
+encoding//src/com/webservice/transaction/Transaction.java=UTF-8
+encoding//src/com/webservice/webserviceCall/Webservice_Call.java=UTF-8
+encoding//src/com/webservice/webserviceCall/Webservice_CallService.java=UTF-8
+encoding//src/com/webservice/webserviceCall/Webservice_CallServiceLocator.java=UTF-8
+encoding//src/com/webservice/webserviceCall/Webservice_CallSoapBindingStub.java=UTF-8
